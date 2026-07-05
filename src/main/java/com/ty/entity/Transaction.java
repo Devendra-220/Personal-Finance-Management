@@ -2,7 +2,12 @@ package com.ty.entity;
 
 import java.time.LocalDate;
 
+import com.ty.enums.CategoryType;
+import com.ty.enums.TransactionType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Table(name="transactions")
+@Table(name = "transactions")
 
 @Getter
 @Setter
@@ -25,20 +30,28 @@ import lombok.AllArgsConstructor;
 
 public class Transaction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String type;
+	@Enumerated(EnumType.STRING)
+	private TransactionType type;
 
-    private Double amount;
 
-    private String category;
+	private Double amount;
 
-    private LocalDate date;
+	@Enumerated(EnumType.STRING)
+	private CategoryType category;
+	
+	private LocalDate date;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public void setDescription(String description) {
+
+		
+	}
 
 }

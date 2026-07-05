@@ -1,0 +1,18 @@
+package com.ty.enums;
+
+public enum CategoryType {
+
+	SALARY,
+	BUSINESS,
+	FREELANCING,
+	FOOD,
+	TRAVEL,
+	SHOPPING,
+	HEALTH, 
+	BILLS,
+	EDUCATION ,
+	INVESTMENT,
+	ENTERTAINMENT,
+	OTHER
+	
+}

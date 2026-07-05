@@ -9,8 +9,8 @@ import com.ty.entity.User;
 
 @Repository
 
-public interface UserRepository  extends JpaRepository<User, Long>{
+public interface UserRepository extends JpaRepository<User, Long> {
 
-	Optional<User>
-	findByUsername(String Username);
+	Optional<User> findByUsername(String Username);
+
 }
