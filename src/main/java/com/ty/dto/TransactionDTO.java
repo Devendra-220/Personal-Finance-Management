@@ -7,14 +7,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class TransactionDTO {
 
-	private String title;
-	private Double amount ;
-	private String description;
-	private LocalDate date;
-	private String type;
-	private String category;
-	
-	
+    private Long id;
+
+    private String title;
+
+    private Double amount;
+
+    private String description;
+
+    private LocalDate date;
+
+    private String type;
+
+    private String category;
+
+    private Long userId;
+
 }

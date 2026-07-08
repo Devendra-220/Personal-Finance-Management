@@ -30,6 +30,8 @@ import lombok.AllArgsConstructor;
 
 public class Transaction {
 
+	private String description;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -49,7 +51,7 @@ public class Transaction {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public void setDescription(String description) {
+	public void setDescription(String description)	{
 
 		
 	}

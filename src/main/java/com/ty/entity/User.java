@@ -26,13 +26,14 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
 
 	@OneToMany(mappedBy = "user",
 	cascade = CascadeType.ALL)
 
 	private List<Transaction> transactions;
 	
-	private Long id;
 
 	private String username;
 

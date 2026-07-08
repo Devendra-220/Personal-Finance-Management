@@ -10,7 +10,7 @@ import com.ty.repository.TransactionRepository;
 import com.ty.service.TransactionService;
 
 @Service
-public abstract  class TransactionServiceImpl implements TransactionService {
+public   class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository repo;
 
@@ -49,10 +49,11 @@ public abstract  class TransactionServiceImpl implements TransactionService {
 
     }
 
-	@Override
-	public Transaction save(Transaction t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Transaction save(Transaction transaction) {
+
+        return repo.save(transaction);
+
+    }
 
 }
