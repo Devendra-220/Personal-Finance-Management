@@ -1,10 +1,6 @@
 package com.ty.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,32 +13,64 @@ import com.ty.service.TransactionService;
 @RequestMapping("/transaction")
 public class TransactionController {
 
-	@Autowired
-	TransactionService service;
+    @Autowired
+    private TransactionService service;
 
-	@PostMapping("/save")
-	public String saveTransaction(@ModelAttribute TransactionDTO transactionDTO) {
+    // Show Add Transaction Page
+    @GetMapping("/add")
+    public String showAddTransactionPage(Model model) {
 
-	    service.save(transactionDTO);
+        model.addAttribute("transaction", new TransactionDTO());
 
-	    return "redirect:/transaction/all";
-	}
-	
-	
-	@GetMapping("/add")
-	public String showAddTransactionPage(Model model) {
+        return "add-transaction";
+    }
 
-	    model.addAttribute("transaction", new TransactionDTO());
+    // Save Transaction
+    @PostMapping("/save")
+    public String saveTransaction(@ModelAttribute TransactionDTO transactionDTO) {
 
-	    return "add-transaction";
-	}
-	
-	@GetMapping("/all")
-	public String getAllTransactions(Model model) {
+        service.save(transactionDTO);
 
-	    model.addAttribute("transactions", service.getAllTransactions());
+        return "redirect:/transaction/all";
+    }
 
-	    return "transaction-list";
-	}
+    // Display All Transactions
+    @GetMapping("/all")
+    public String getAllTransactions(Model model) {
+
+        model.addAttribute("transactions", service.getAllTransactions());
+
+        return "transaction-list";
+    }
+
+    // Show Edit Page
+    @GetMapping("/edit/{id}")
+    public String editTransaction(@PathVariable Long id, Model model) {
+
+        Transaction transaction = service.getById(id);
+
+        model.addAttribute("transaction", transaction);
+
+        return "edit-transaction";
+    }
+
+    // Update Transaction
+    @PostMapping("/update/{id}")
+    public String updateTransaction(@PathVariable Long id,
+                                    @ModelAttribute TransactionDTO dto) {
+
+        service.update(id, dto);
+
+        return "redirect:/transaction/all";
+    }
+
+    // Delete Transaction
+    @GetMapping("/delete/{id}")
+    public String deleteTransaction(@PathVariable Long id) {
+
+        service.delete(id);
+
+        return "redirect:/transaction/all";
+    }
 
 }

@@ -63,4 +63,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
+	@Override
+	public UserDTO register(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

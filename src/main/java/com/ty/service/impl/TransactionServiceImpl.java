@@ -10,7 +10,7 @@ import com.ty.repository.TransactionRepository;
 import com.ty.service.TransactionService;
 
 @Service
-public   class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository repo;
 
@@ -24,36 +24,44 @@ public   class TransactionServiceImpl implements TransactionService {
         Transaction transaction = new Transaction();
 
         transaction.setAmount(dto.getAmount());
-
         transaction.setDate(dto.getDate());
-
         transaction.setDescription(dto.getDescription());
 
-        // We will set category, type and user later.
-
         return repo.save(transaction);
-
-    }
-
-    @Override
-    public List<Transaction> getAll(Long userId) {
-
-        return repo.findByUserId(userId);
-
     }
 
     @Override
     public List<Transaction> getAllTransactions() {
 
         return repo.findAll();
-
     }
 
     @Override
-    public Transaction save(Transaction transaction) {
+    public Transaction getById(Long id) {
 
-        return repo.save(transaction);
-
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found with ID : " + id));
     }
 
+    @Override
+    public Transaction update(Long id, TransactionDTO dto) {
+
+        Transaction transaction = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found with ID : " + id));
+
+        transaction.setAmount(dto.getAmount());
+        transaction.setDate(dto.getDate());
+        transaction.setDescription(dto.getDescription());
+
+        return repo.save(transaction);
+    }
+
+    @Override
+    public void delete(Long id) {
+
+        Transaction transaction = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found with ID : " + id));
+
+        repo.delete(transaction);
+    }
 }

@@ -7,12 +7,14 @@ import com.ty.entity.Transaction;
 
 public interface TransactionService {
 
-    Transaction save(Transaction t);
-
-    List<Transaction> getAll(Long userId);
+    Transaction save(TransactionDTO dto);
 
     List<Transaction> getAllTransactions();
 
-	Transaction save(TransactionDTO dto);
+    Transaction getById(Long id);
+
+    Transaction update(Long id, TransactionDTO dto);
+
+    void delete(Long id);
 
 }
